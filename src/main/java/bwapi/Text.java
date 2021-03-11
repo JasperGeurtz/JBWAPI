@@ -121,6 +121,10 @@ public enum Text {
         this.id = (byte) id;
     }
 
+    public final int getID() {
+        return id;
+    }
+
     /**
      * Format text with a textcolor to display on broodwar
      */
@@ -134,7 +138,7 @@ public enum Text {
      * @return true if c is a regular color, not {@link #Previous}, {@link #Invisible}, {@link #Invisible2}, {@link #Align_Right} or {@link #Align_Center}
      * @since 4.2.0
      */
-    boolean isColor() {
+    public final boolean isColor() {
         final int c = this.id;
         return (2 <= c && c <= 8) || (14 <= c && c <= 17) || (21 <= c && c <= 31);
     }
@@ -164,6 +168,10 @@ public enum Text {
 
         Size(final int id) {
             this.id = id;
+        }
+
+        public final int getID() {
+            return id;
         }
     }
 }

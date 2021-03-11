@@ -58,4 +58,8 @@ public enum UnitCommandType {
     UnitCommandType(final int id) {
         this.id = id;
     }
+
+    public final int getID() {
+        return id;
+    }
 }

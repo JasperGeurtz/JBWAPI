@@ -34,4 +34,8 @@ public enum CoordinateType {
     CoordinateType(final int id) {
         this.id = id;
     }
+
+    public final int getID() {
+        return id;
+    }
 }

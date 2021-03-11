@@ -29,4 +29,8 @@ public enum DamageType {
     DamageType(final int id) {
         this.id = id;
     }
+
+    public final int getID() {
+        return id;
+    }
 }

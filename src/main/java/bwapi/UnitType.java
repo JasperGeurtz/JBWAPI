@@ -258,6 +258,10 @@ public enum UnitType {
         this.id = id;
     }
 
+    public final int getID() {
+        return id;
+    }
+
     /**
      * Retrieves the maximum unit width from the set of all units. Used
      * internally to search through unit positions efficiently.
@@ -285,7 +289,7 @@ public enum UnitType {
      * Returns {@link Race#None} indicating that the unit type does not belong to any particular race (a
      * critter for example).
      */
-    public Race getRace() {
+    public final Race getRace() {
         return UnitTypeContainer.unitRace[id];
     }
 
@@ -297,7 +301,7 @@ public enum UnitType {
      * the second value is the number of those types that are required (this value is 2 for @Archons, and 1 for all other types).
      * Returns pair({@link UnitType#None},0) If this unit type cannot be made by the player.
      */
-    public Pair<UnitType, Integer> whatBuilds() {
+    public final Pair<UnitType, Integer> whatBuilds() {
         // Retrieve the type
         final UnitType type = UnitTypeContainer.whatBuilds[id];
         int count = 1;
@@ -316,7 +320,7 @@ public enum UnitType {
      *
      * @return Map containing a UnitType to number mapping of UnitTypes required.
      */
-    public Map<UnitType, Integer> requiredUnits() {
+    public final Map<UnitType, Integer> requiredUnits() {
         return UnitTypeContainer.reqUnitsMap.get(id);
     }
 
@@ -330,7 +334,7 @@ public enum UnitType {
      * Returns {@link TechType#None} If creating this unit type does not require a technology to be
      * researched.
      */
-    public TechType requiredTech() {
+    public final TechType requiredTech() {
         return this == Zerg_Lurker || this == Zerg_Lurker_Egg ? Lurker_Aspect : TechType.None;
     }
 
@@ -341,7 +345,7 @@ public enum UnitType {
      * ability.
      * Returns {@link TechType#None} If this unit type does not have an active cloak ability.
      */
-    public TechType cloakingTech() {
+    public final TechType cloakingTech() {
         switch (this) {
             case Terran_Ghost:
             case Hero_Alexei_Stukov:
@@ -364,7 +368,7 @@ public enum UnitType {
      *
      * @return List of TechTypes containing ability information.
      */
-    public List<TechType> abilities() {
+    public final List<TechType> abilities() {
         return Collections.unmodifiableList(Arrays.asList(UnitTypeContainer.unitTechs[id]));
     }
 
@@ -373,7 +377,7 @@ public enum UnitType {
      *
      * @return List of UpgradeTypes containing upgrade types that will impact this unit type.
      */
-    public List<UpgradeType> upgrades() {
+    public final List<UpgradeType> upgrades() {
         return Collections.unmodifiableList(Arrays.asList(UnitTypeContainer.upgrades[id]));
     }
 
@@ -383,7 +387,7 @@ public enum UnitType {
      *
      * @return {@link UpgradeType} indicating the upgrade that increases this unit type's armor amount.
      */
-    public UpgradeType armorUpgrade() {
+    public final UpgradeType armorUpgrade() {
         return UnitTypeContainer.armorUpgrade[id];
     }
 
@@ -394,7 +398,7 @@ public enum UnitType {
      *
      * @return Integer indicating the maximum amount of hit points for this unit type.
      */
-    public int maxHitPoints() {
+    public final int maxHitPoints() {
         return UnitTypeContainer.defaultMaxHP[id];
     }
 
@@ -406,7 +410,7 @@ public enum UnitType {
      * @return Integer indicating the maximum amount of shield points for this unit type.
      * Returns 0 if this unit type does not have shields.
      */
-    public int maxShields() {
+    public final int maxShields() {
         return UnitTypeContainer.defaultMaxSP[id];
     }
 
@@ -416,7 +420,7 @@ public enum UnitType {
      * @return Integer indicating the maximum amount of energy for this unit type.
      * Retunrs 0 ff this unit does not gain energy for abilities.
      */
-    public int maxEnergy() {
+    public final int maxEnergy() {
         return isSpellcaster() ? isHero() ? 250 : 200 : 0;
     }
 
@@ -427,7 +431,7 @@ public enum UnitType {
      *
      * @return The amount of armor the unit type has.
      */
-    public int armor() {
+    public final int armor() {
         return UnitTypeContainer.defaultArmorAmount[id];
     }
 
@@ -438,7 +442,7 @@ public enum UnitType {
      *
      * @return Mineral cost of the unit.
      */
-    public int mineralPrice() {
+    public final int mineralPrice() {
         return UnitTypeContainer.defaultOreCost[id];
     }
 
@@ -449,7 +453,7 @@ public enum UnitType {
      *
      * @return Vespene gas cost of the unit.
      */
-    public int gasPrice() {
+    public final int gasPrice() {
         return UnitTypeContainer.defaultGasCost[id];
     }
 
@@ -461,7 +465,7 @@ public enum UnitType {
      * @return Number of frames needed in order to build the unit.
      * @see Unit#getRemainingBuildTime
      */
-    public int buildTime() {
+    public final int buildTime() {
         return UnitTypeContainer.defaultTimeCost[id];
     }
 
@@ -477,7 +481,7 @@ public enum UnitType {
      * @see Player#supplyTotal
      * @see Player#supplyUsed
      */
-    public int supplyRequired() {
+    public final int supplyRequired() {
         return UnitTypeContainer.unitSupplyRequired[id];
     }
 
@@ -492,7 +496,7 @@ public enum UnitType {
      * @see Player#supplyTotal
      * @see Player#supplyUsed
      */
-    public int supplyProvided() {
+    public final int supplyProvided() {
         return UnitTypeContainer.unitSupplyProvided[id];
     }
 
@@ -503,7 +507,7 @@ public enum UnitType {
      * Returns 255 If this unit type can not be transported.
      * @see #spaceProvided
      */
-    public int spaceRequired() {
+    public final int spaceRequired() {
         return UnitTypeContainer.unitSpaceRequired[id];
     }
 
@@ -514,7 +518,7 @@ public enum UnitType {
      * @return The number of slots provided by this unit type.
      * @see #spaceRequired
      */
-    public int spaceProvided() {
+    public final int spaceProvided() {
         return UnitTypeContainer.unitSpaceProvided[id];
     }
 
@@ -525,7 +529,7 @@ public enum UnitType {
      * @return Number of points awarded for constructing this unit type.
      * @see #destroyScore
      */
-    public int buildScore() {
+    public final int buildScore() {
         return UnitTypeContainer.unitBuildScore[id];
     }
 
@@ -536,7 +540,7 @@ public enum UnitType {
      * @return Number of points awarded for killing this unit type.
      * @see #buildScore
      */
-    public int destroyScore() {
+    public final int destroyScore() {
         return UnitTypeContainer.unitDestroyScore[id];
     }
 
@@ -547,7 +551,7 @@ public enum UnitType {
      * @return {@link UnitSizeType} indicating the conceptual size of the unit type.
      * @see WeaponType#damageType()
      */
-    public UnitSizeType size() {
+    public final UnitSizeType size() {
         return UnitTypeContainer.unitSize[id];
     }
 
@@ -557,7 +561,7 @@ public enum UnitType {
      *
      * @return Width of this unit type, in tiles.
      */
-    public int tileWidth() {
+    public final int tileWidth() {
         return UnitTypeContainer.unitDimensions[id][UnitTypeContainer.UnitDimensions.tileWidth];
     }
 
@@ -567,7 +571,7 @@ public enum UnitType {
      *
      * @return Height of this unit type, in tiles.
      */
-    public int tileHeight() {
+    public final int tileHeight() {
         return UnitTypeContainer.unitDimensions[id][UnitTypeContainer.UnitDimensions.tileHeight];
     }
 
@@ -577,7 +581,7 @@ public enum UnitType {
      *
      * @return {@link TilePosition} containing the width (x) and height (y) of the unit type, in tiles.
      */
-    public TilePosition tileSize() {
+    public final TilePosition tileSize() {
         return new TilePosition(tileWidth(), tileHeight());
     }
 
@@ -586,7 +590,7 @@ public enum UnitType {
      *
      * @return Distance to this unit type's left edge from its center, in pixels.
      */
-    public int dimensionLeft() {
+    public final int dimensionLeft() {
         return UnitTypeContainer.unitDimensions[id][UnitTypeContainer.UnitDimensions.left];
     }
 
@@ -595,7 +599,7 @@ public enum UnitType {
      *
      * @return Distance to this unit type's top edge from its center, in pixels.
      */
-    public int dimensionUp() {
+    public final int dimensionUp() {
         return UnitTypeContainer.unitDimensions[id][UnitTypeContainer.UnitDimensions.up];
     }
 
@@ -604,7 +608,7 @@ public enum UnitType {
      *
      * @return Distance to this unit type's right edge from its center, in pixels.
      */
-    public int dimensionRight() {
+    public final int dimensionRight() {
         return UnitTypeContainer.unitDimensions[id][UnitTypeContainer.UnitDimensions.right];
     }
 
@@ -613,7 +617,7 @@ public enum UnitType {
      *
      * @return Distance to this unit type's bottom edge from its center, in pixels.
      */
-    public int dimensionDown() {
+    public final int dimensionDown() {
         return UnitTypeContainer.unitDimensions[id][UnitTypeContainer.UnitDimensions.down];
     }
 
@@ -623,7 +627,7 @@ public enum UnitType {
      *
      * @return Width of the unit, in pixels.
      */
-    public int width() {
+    public final int width() {
         return dimensionLeft() + 1 + dimensionRight();
     }
 
@@ -633,7 +637,7 @@ public enum UnitType {
      *
      * @return Height of the unit, in pixels.
      */
-    public int height() {
+    public final int height() {
         return dimensionUp() + 1 + dimensionDown();
     }
 
@@ -642,7 +646,7 @@ public enum UnitType {
      *
      * @return Distance at which this unit type begins to seek out enemy units, in pixels.
      */
-    public int seekRange() {
+    public final int seekRange() {
         return UnitTypeContainer.seekRangeTiles[id] * 32;
     }
 
@@ -651,7 +655,7 @@ public enum UnitType {
      *
      * @return Sight range of this unit type, measured in pixels.
      */
-    public int sightRange() {
+    public final int sightRange() {
         return UnitTypeContainer.sightRangeTiles[id] * 32;
     }
 
@@ -662,7 +666,7 @@ public enum UnitType {
      * @see #maxGroundHits
      * @see #airWeapon
      */
-    public WeaponType groundWeapon() {
+    public final WeaponType groundWeapon() {
         return UnitTypeContainer.groundWeapon[id];
     }
 
@@ -675,7 +679,7 @@ public enum UnitType {
      * @see #groundWeapon
      * @see #maxAirHits
      */
-    public int maxGroundHits() {
+    public final int maxGroundHits() {
         return UnitTypeContainer.groundWeaponHits[id];
     }
 
@@ -686,7 +690,7 @@ public enum UnitType {
      * @see #maxAirHits
      * @see #groundWeapon
      */
-    public WeaponType airWeapon() {
+    public final WeaponType airWeapon() {
         return UnitTypeContainer.airWeapon[id];
     }
 
@@ -699,7 +703,7 @@ public enum UnitType {
      * @see #airWeapon
      * @see #maxGroundHits
      */
-    public int maxAirHits() {
+    public final int maxAirHits() {
         return UnitTypeContainer.airWeaponHits[id];
     }
 
@@ -712,7 +716,7 @@ public enum UnitType {
      * @return The approximate top speed, in pixels per frame, as a double. For liftable @Terran
      * structures, this function returns their movement speed while lifted.
      */
-    public double topSpeed() {
+    public final double topSpeed() {
         return UnitTypeContainer.unitTopSpeeds[id];
     }
 
@@ -721,7 +725,7 @@ public enum UnitType {
      *
      * @return How fast the unit can accelerate to its top speed.
      */
-    public int acceleration() {
+    public final int acceleration() {
         return UnitTypeContainer.unitAcceleration[id];
     }
 
@@ -731,7 +735,7 @@ public enum UnitType {
      *
      * @return A halting distance value.
      */
-    public int haltDistance() {
+    public final int haltDistance() {
         return UnitTypeContainer.unitHaltDistance[id];
     }
 
@@ -741,7 +745,7 @@ public enum UnitType {
      *
      * @return A turn radius value.
      */
-    public int turnRadius() {
+    public final int turnRadius() {
         return UnitTypeContainer.unitTurnRadius[id];
     }
 
@@ -753,7 +757,7 @@ public enum UnitType {
      *
      * @return true if this unit type can have a production queue, and false otherwise.
      */
-    public boolean canProduce() {
+    public final boolean canProduce() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.ProducesUnits) != 0;
     }
 
@@ -766,7 +770,7 @@ public enum UnitType {
      * @return true if this unit type is capable of damaging other units with a standard attack,
      * and false otherwise.
      */
-    public boolean canAttack() {
+    public final boolean canAttack() {
         switch (this) {
             case Protoss_Carrier:
             case Hero_Gantrithor:
@@ -789,7 +793,7 @@ public enum UnitType {
      *
      * @return true if this unit can use a movement command, and false if they cannot move.
      */
-    public boolean canMove() {
+    public final boolean canMove() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.AutoAttackAndMove) != 0;
     }
 
@@ -799,7 +803,7 @@ public enum UnitType {
      *
      * @return true if this unit type is in the air by default, and false otherwise.
      */
-    public boolean isFlyer() {
+    public final boolean isFlyer() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.Flyer) != 0;
     }
 
@@ -808,7 +812,7 @@ public enum UnitType {
      *
      * @return true if this unit type regenerates its hit points, and false otherwise.
      */
-    public boolean regeneratesHP() {
+    public final boolean regeneratesHP() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.RegeneratesHP) != 0;
     }
 
@@ -818,7 +822,7 @@ public enum UnitType {
      * @return true if this unit type generates energy, and false if it does not have an energy
      * pool.
      */
-    public boolean isSpellcaster() {
+    public final boolean isSpellcaster() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.Spellcaster) != 0;
     }
 
@@ -828,7 +832,7 @@ public enum UnitType {
      *
      * @return true if this unit type is permanently cloaked, and false otherwise.
      */
-    public boolean hasPermanentCloak() {
+    public final boolean hasPermanentCloak() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.PermanentCloak) != 0;
     }
 
@@ -838,7 +842,7 @@ public enum UnitType {
      *
      * @return true if this unit type is invincible, and false if it is vulnerable to attacks.
      */
-    public boolean isInvincible() {
+    public final boolean isInvincible() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.Invincible) != 0;
     }
 
@@ -848,7 +852,7 @@ public enum UnitType {
      *
      * @return true if this unit type has the organic property, and false otherwise.
      */
-    public boolean isOrganic() {
+    public final boolean isOrganic() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.OrganicUnit) != 0;
     }
 
@@ -858,7 +862,7 @@ public enum UnitType {
      *
      * @return true if this unit type has the mechanical property, and false otherwise.
      */
-    public boolean isMechanical() {
+    public final boolean isMechanical() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.Mechanical) != 0;
     }
 
@@ -868,7 +872,7 @@ public enum UnitType {
      *
      * @return true if this unit type has the robotic property, and false otherwise.
      */
-    public boolean isRobotic() {
+    public final boolean isRobotic() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.RoboticUnit) != 0;
     }
 
@@ -878,7 +882,7 @@ public enum UnitType {
      * @return true if this unit type is a detector by default, false if it does not have this
      * property
      */
-    public boolean isDetector() {
+    public final boolean isDetector() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.Detector) != 0;
     }
 
@@ -889,7 +893,7 @@ public enum UnitType {
      * @return true if this unit type may contain resources that can be harvested, false
      * otherwise.
      */
-    public boolean isResourceContainer() {
+    public final boolean isResourceContainer() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.ResourceContainer) != 0;
     }
 
@@ -900,7 +904,7 @@ public enum UnitType {
      *
      * @return true if the unit type is a resource depot, false if it is not.
      */
-    public boolean isResourceDepot() {
+    public final boolean isResourceDepot() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.ResourceDepot) != 0;
     }
 
@@ -910,7 +914,7 @@ public enum UnitType {
      *
      * @return true if this unit type is a refinery, and false if it is not.
      */
-    public boolean isRefinery() {
+    public final boolean isRefinery() {
         switch (this) {
             case Terran_Refinery:
             case Zerg_Extractor:
@@ -927,7 +931,7 @@ public enum UnitType {
      *
      * @return true if this unit type is a worker, and false if it is not.
      */
-    public boolean isWorker() {
+    public final boolean isWorker() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.Worker) != 0;
     }
 
@@ -938,7 +942,7 @@ public enum UnitType {
      *
      * @return true if this unit type can only be placed in a psi field, false otherwise.
      */
-    public boolean requiresPsi() {
+    public final boolean requiresPsi() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.RequiresPsi) != 0;
     }
 
@@ -947,7 +951,7 @@ public enum UnitType {
      *
      * @return true if this unit type requires creep, false otherwise.
      */
-    public boolean requiresCreep() {
+    public final boolean requiresCreep() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.CreepBuilding) != 0;
     }
 
@@ -958,7 +962,7 @@ public enum UnitType {
      * @return true if morphing this unit type will spawn two of them, and false if only one
      * is spawned.
      */
-    public boolean isTwoUnitsInOneEgg() {
+    public final boolean isTwoUnitsInOneEgg() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.TwoUnitsIn1Egg) != 0;
     }
 
@@ -971,7 +975,7 @@ public enum UnitType {
      * @return true if this unit can use the @Burrow ability, and false otherwise.
      * @see TechType#Burrowing
      */
-    public boolean isBurrowable() {
+    public final boolean isBurrowable() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.Burrowable) != 0;
     }
 
@@ -985,7 +989,7 @@ public enum UnitType {
      * @see TechType#Cloaking_Field
      * @see TechType#Personnel_Cloaking
      */
-    public boolean isCloakable() {
+    public final boolean isCloakable() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.Cloakable) != 0;
     }
 
@@ -994,7 +998,7 @@ public enum UnitType {
      *
      * @return true if this unit is a building, and false otherwise.
      */
-    public boolean isBuilding() {
+    public final boolean isBuilding() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.Building) != 0;
     }
 
@@ -1003,7 +1007,7 @@ public enum UnitType {
      *
      * @return true if this unit is an add-on, and false otherwise.
      */
-    public boolean isAddon() {
+    public final boolean isAddon() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.Addon) != 0;
     }
 
@@ -1012,7 +1016,7 @@ public enum UnitType {
      *
      * @return true if this unit type is a flyable building, false otherwise.
      */
-    public boolean isFlyingBuilding() {
+    public final boolean isFlyingBuilding() {
         return (UnitTypeContainer.unitFlags[id] & UnitTypeContainer.FlyingBuilding) != 0;
     }
 
@@ -1021,7 +1025,7 @@ public enum UnitType {
      *
      * @return true if this unit is intended to be neutral, and false otherwise.
      */
-    public boolean isNeutral() {
+    public final boolean isNeutral() {
         return getRace() == Race.None &&
                 (isCritter() || isResourceContainer() || isSpell());
     }
@@ -1035,7 +1039,7 @@ public enum UnitType {
      *
      * @return true if this unit type is a hero type, and false otherwise.
      */
-    public boolean isHero() {
+    public final boolean isHero() {
         return ((UnitTypeContainer.unitFlags[id] & UnitTypeContainer.Hero) != 0) ||
                 this == Hero_Dark_Templar ||
                 this == Terran_Civilian;
@@ -1047,7 +1051,7 @@ public enum UnitType {
      *
      * @return true if this unit type is a powerup type, and false otherwise.
      */
-    public boolean isPowerup() {
+    public final boolean isPowerup() {
         return this == Powerup_Uraj_Crystal ||
                 this == Powerup_Khalis_Crystal ||
                 (this.id >= Powerup_Flag.id && this.id < None.id);
@@ -1061,7 +1065,7 @@ public enum UnitType {
      * @return true if this unit type is one of the three race beacons, and false otherwise.
      * @see #isFlagBeacon
      */
-    public boolean isBeacon() {
+    public final boolean isBeacon() {
         return this == Special_Zerg_Beacon ||
                 this == Special_Terran_Beacon ||
                 this == Special_Protoss_Beacon;
@@ -1076,7 +1080,7 @@ public enum UnitType {
      * @return true if this unit type is one of the three race flag beacons, and false otherwise.
      * @see #isBeacon
      */
-    public boolean isFlagBeacon() {
+    public final boolean isFlagBeacon() {
         return this == Special_Zerg_Flag_Beacon ||
                 this == Special_Terran_Flag_Beacon ||
                 this == Special_Protoss_Flag_Beacon;
@@ -1088,7 +1092,7 @@ public enum UnitType {
      *
      * @return true if this structure is a special building, and false otherwise.
      */
-    public boolean isSpecialBuilding() {
+    public final boolean isSpecialBuilding() {
         return isBuilding() &&
                 whatBuilds().getValue() == 0 &&
                 this != Zerg_Infested_Command_Center;
@@ -1102,7 +1106,7 @@ public enum UnitType {
      *
      * @return true if this unit type is used for an ability, and false otherwise.
      */
-    public boolean isSpell() {
+    public final boolean isSpell() {
         return this == Spell_Dark_Swarm ||
                 this == Spell_Disruption_Web ||
                 this == Spell_Scanner_Sweep;
@@ -1115,7 +1119,7 @@ public enum UnitType {
      * @return true if this unit type spreads creep.
      * @since 4.1.2
      */
-    public boolean producesCreep() {
+    public final boolean producesCreep() {
         return producesLarva() ||
                 this == Zerg_Creep_Colony ||
                 this == Zerg_Spore_Colony ||
@@ -1128,7 +1132,7 @@ public enum UnitType {
      *
      * @return true if this unit type produces larva.
      */
-    public boolean producesLarva() {
+    public final boolean producesLarva() {
         return this == Zerg_Hatchery ||
                 this == Zerg_Lair ||
                 this == Zerg_Hive;
@@ -1141,7 +1145,7 @@ public enum UnitType {
      *
      * @return true if this unit type is a mineral field resource.
      */
-    public boolean isMineralField() {
+    public final boolean isMineralField() {
         return this == Resource_Mineral_Field ||
                 this == Resource_Mineral_Field_Type_2 ||
                 this == Resource_Mineral_Field_Type_3;
@@ -1152,7 +1156,7 @@ public enum UnitType {
      *
      * @return true if this unit type is a critter, and false otherwise.
      */
-    public boolean isCritter() {
+    public final boolean isCritter() {
         switch (this) {
             case Critter_Bengalaas:
             case Critter_Kakaru:
@@ -1174,7 +1178,7 @@ public enum UnitType {
      * @return true if this unit type can construct an add-on, and false if it can not.
      * @see #isAddon
      */
-    public boolean canBuildAddon() {
+    public final boolean canBuildAddon() {
         return this == Terran_Command_Center ||
                 this == Terran_Factory ||
                 this == Terran_Starport ||
@@ -1193,7 +1197,7 @@ public enum UnitType {
      * @see Player#isUnitAvailable
      * @since 4.1.2
      */
-    public List<UnitType> buildsWhat() {
+    public final List<UnitType> buildsWhat() {
         return Collections.unmodifiableList(Arrays.asList(UnitTypeContainer.buildsWhat[id]));
     }
 
@@ -1208,7 +1212,7 @@ public enum UnitType {
      * @see Player#isResearchAvailable
      * @since 4.1.2
      */
-    public List<TechType> researchesWhat() {
+    public final List<TechType> researchesWhat() {
         return Collections.unmodifiableList(Arrays.asList(UnitTypeContainer.researchesWhat[id]));
     }
 
@@ -1222,7 +1226,7 @@ public enum UnitType {
      * @see Player#getMaxUpgradeLevel
      * @since 4.1.2
      */
-    public List<UpgradeType> upgradesWhat() {
+    public final List<UpgradeType> upgradesWhat() {
         return Collections.unmodifiableList(Arrays.asList(UnitTypeContainer.upgradesWhat[id]));
     }
 
@@ -1236,7 +1240,7 @@ public enum UnitType {
      * @see UpgradeType#whatUpgrades()
      * @since 4.2.0
      */
-    public boolean isSuccessorOf(final UnitType type) {
+    public final boolean isSuccessorOf(final UnitType type) {
         if (this == type) {
             return true;
         }

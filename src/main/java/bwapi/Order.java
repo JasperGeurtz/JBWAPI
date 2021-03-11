@@ -209,10 +209,13 @@ public enum Order {
         Arrays.stream(Order.values()).forEach(v -> idToEnum[v.id] = v);
     }
 
-
     final int id;
 
     Order(final int id) {
         this.id = id;
+    }
+
+    public final int getID() {
+        return id;
     }
 }

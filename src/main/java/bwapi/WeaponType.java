@@ -410,6 +410,10 @@ public enum WeaponType {
         this.id = id;
     }
 
+    public final int getID() {
+        return id;
+    }
+
     /**
      * Retrieves the technology type that must be researched before this weapon can
      * be used.
@@ -418,7 +422,7 @@ public enum WeaponType {
      * Returns {@link TechType#None} if no tech type is required to use this weapon.
      * @see TechType#getWeapon
      */
-    public TechType getTech() {
+    public final TechType getTech() {
         return attachedTech[id];
     }
 
@@ -431,7 +435,7 @@ public enum WeaponType {
      * @see UnitType#groundWeapon
      * @see UnitType#airWeapon
      */
-    public UnitType whatUses() {
+    public final UnitType whatUses() {
         return whatUses[id];
     }
 
@@ -443,7 +447,7 @@ public enum WeaponType {
      *
      * @return Amount of base damage that this weapon deals.
      */
-    public int damageAmount() {
+    public final int damageAmount() {
         return defaultWpnDamageAmt[id];
     }
 
@@ -454,7 +458,7 @@ public enum WeaponType {
      * @return Amount of damage added for every weapon upgrade.
      * @see #upgradeType
      */
-    public int damageBonus() {
+    public final int damageBonus() {
         return defaultWpnDamageBonus[id];
     }
 
@@ -465,7 +469,7 @@ public enum WeaponType {
      * @see Unit#getGroundWeaponCooldown
      * @see Unit#getAirWeaponCooldown
      */
-    public int damageCooldown() {
+    public final int damageCooldown() {
         return wpnDamageCooldowns[id];
     }
 
@@ -477,7 +481,7 @@ public enum WeaponType {
      * @return The damage factor multiplied by the amount to obtain the total damage.
      * @see #damageAmount
      */
-    public int damageFactor() {
+    public final int damageFactor() {
         return wpnDamageFactor[id];
     }
 
@@ -487,7 +491,7 @@ public enum WeaponType {
      * @return The {@link UpgradeType} used to upgrade this weapon's damage.
      * @see #damageBonus
      */
-    public UpgradeType upgradeType() {
+    public final UpgradeType upgradeType() {
         return upgrade[id];
     }
 
@@ -498,7 +502,7 @@ public enum WeaponType {
      * @see DamageType
      * @see UnitSizeType
      */
-    public DamageType damageType() {
+    public final DamageType damageType() {
         return damageType[id];
     }
 
@@ -507,7 +511,7 @@ public enum WeaponType {
      *
      * @return ExplosionType identifying how damage is applied to a target location.
      */
-    public ExplosionType explosionType() {
+    public final ExplosionType explosionType() {
         return explosionType[id];
     }
 
@@ -518,7 +522,7 @@ public enum WeaponType {
      *
      * @return Minimum attack range, in pixels.
      */
-    public int minRange() {
+    public final int minRange() {
         return wpnMinRange[id];
     }
 
@@ -527,7 +531,7 @@ public enum WeaponType {
      *
      * @return Maximum attack range, in pixels.
      */
-    public int maxRange() {
+    public final int maxRange() {
         return wpnMaxRange[id];
     }
 
@@ -536,7 +540,7 @@ public enum WeaponType {
      *
      * @return Radius of the inner splash area, in pixels.
      */
-    public int innerSplashRadius() {
+    public final int innerSplashRadius() {
         return wpnSplashRangeInner[id];
     }
 
@@ -545,7 +549,7 @@ public enum WeaponType {
      *
      * @return Radius of the middle splash area, in pixels.
      */
-    public int medianSplashRadius() {
+    public final int medianSplashRadius() {
         return wpnSplashRangeMid[id];
     }
 
@@ -565,7 +569,7 @@ public enum WeaponType {
      * @see Unit#isFlying
      * @see UnitType#isFlyer
      */
-    public boolean targetsAir() {
+    public final boolean targetsAir() {
         return (wpnFlags[id] & TARG_AIR) != 0;
     }
 
@@ -576,7 +580,7 @@ public enum WeaponType {
      * @see Unit#isFlying
      * @see UnitType#isFlyer
      */
-    public boolean targetsGround() {
+    public final boolean targetsGround() {
         return (wpnFlags[id] & TARG_GROUND) != 0;
     }
 
@@ -587,7 +591,7 @@ public enum WeaponType {
      * @see #targetsOrgOrMech
      * @see UnitType#isMechanical
      */
-    public boolean targetsMechanical() {
+    public final boolean targetsMechanical() {
         return (wpnFlags[id] & TARG_MECH) != 0;
     }
 
@@ -598,7 +602,7 @@ public enum WeaponType {
      * @see #targetsOrgOrMech
      * @see UnitType#isOrganic
      */
-    public boolean targetsOrganic() {
+    public final boolean targetsOrganic() {
         return (wpnFlags[id] & TARG_ORGANIC) != 0;
     }
 
@@ -608,7 +612,7 @@ public enum WeaponType {
      * @return true if this weapon type cannot target buildings, and false if it can.
      * @see UnitType#isBuilding
      */
-    public boolean targetsNonBuilding() {
+    public final boolean targetsNonBuilding() {
         return (wpnFlags[id] & TARG_NOBUILD) != 0;
     }
 
@@ -618,7 +622,7 @@ public enum WeaponType {
      * @return true if this weapon type cannot target robotic units, and false if it can.
      * @see UnitType#isRobotic
      */
-    public boolean targetsNonRobotic() {
+    public final boolean targetsNonRobotic() {
         return (wpnFlags[id] & TARG_NOROBOT) != 0;
     }
 
@@ -630,7 +634,7 @@ public enum WeaponType {
      *
      * @return true if this weapon type can target a location, and false otherwise.
      */
-    public boolean targetsTerrain() {
+    public final boolean targetsTerrain() {
         return (wpnFlags[id] & TARG_TERRAIN) != 0;
     }
 
@@ -643,7 +647,7 @@ public enum WeaponType {
      * @see UnitType#isOrganic
      * @see UnitType#isMechanical
      */
-    public boolean targetsOrgOrMech() {
+    public final boolean targetsOrgOrMech() {
         return (wpnFlags[id] & TARG_ORGMECH) != 0;
     }
 
@@ -654,7 +658,7 @@ public enum WeaponType {
      * @return true if this weapon type can only target your own units, and false otherwise.
      * @see Unit#getPlayer
      */
-    public boolean targetsOwn() {
+    public final boolean targetsOwn() {
         return (wpnFlags[id] & TARG_OWN) != 0;
     }
 }

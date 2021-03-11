@@ -211,17 +211,21 @@ public enum UpgradeType {
         this.id = id;
     }
 
+    public final int getID() {
+        return id;
+    }
+
     /**
      * Retrieves the race the upgrade is for.
      * For example, UpgradeType.Terran_Infantry_Armor.getRace() will return {@link Race#Terran}.
      *
      * @return {@link Race} that this upgrade belongs to.
      */
-    public Race getRace() {
+    public final Race getRace() {
         return upgradeRaces[id];
     }
 
-    public int mineralPrice() {
+    public final int mineralPrice() {
         return mineralPrice(1);
     }
 
@@ -233,7 +237,7 @@ public enum UpgradeType {
      *              Upgrades start at level 0.
      * @return The mineral cost of the upgrade for the given level.
      */
-    public int mineralPrice(final int level) {
+    public final int mineralPrice(final int level) {
         return defaultOreCostBase[id] + Math.max(0, level - 1) * mineralPriceFactor();
     }
 
@@ -242,11 +246,11 @@ public enum UpgradeType {
      *
      * @return The mineral cost added to the upgrade after each level.
      */
-    public int mineralPriceFactor() {
+    public final int mineralPriceFactor() {
         return defaultOreCostFactor[id];
     }
 
-    public int gasPrice() {
+    public final int gasPrice() {
         return mineralPrice();
     }
 
@@ -258,7 +262,7 @@ public enum UpgradeType {
      *              Upgrades start at level 0.
      * @return The gas cost of the upgrade for the given level.
      */
-    public int gasPrice(final int level) {
+    public final int gasPrice(final int level) {
         return mineralPrice(level);
     }
 
@@ -267,11 +271,11 @@ public enum UpgradeType {
      *
      * @return The gas cost added to the upgrade after each level.
      */
-    public int gasPriceFactor() {
+    public final int gasPriceFactor() {
         return mineralPriceFactor();
     }
 
-    public int upgradeTime() {
+    public final int upgradeTime() {
         return upgradeTime(1);
     }
 
@@ -281,7 +285,7 @@ public enum UpgradeType {
      * @param level The next upgrade level. Upgrades start at level 0.
      * @return The time cost of the upgrade for the given level.
      */
-    public int upgradeTime(final int level) {
+    public final int upgradeTime(final int level) {
         return defaultTimeCostBase[id] + Math.max(0, level - 1) * upgradeTimeFactor();
     }
 
@@ -290,7 +294,7 @@ public enum UpgradeType {
      *
      * @return The time cost added to the upgrade after each level.
      */
-    public int upgradeTimeFactor() {
+    public final int upgradeTimeFactor() {
         return defaultTimeCostFactor[id];
     }
 
@@ -299,7 +303,7 @@ public enum UpgradeType {
      *
      * @return The {@link UnitType} that is used to upgrade this type.
      */
-    public UnitType whatUpgrades() {
+    public final UnitType whatUpgrades() {
         return whatUpgrades[id];
     }
 
@@ -308,7 +312,7 @@ public enum UpgradeType {
      *
      * @return Set of unit types that passively use this upgrade type.
      */
-    public List<UnitType> whatUses() {
+    public final List<UnitType> whatUses() {
         return Collections.unmodifiableList(Arrays.asList(upgradeWhatUses[id]));
     }
 
@@ -317,11 +321,11 @@ public enum UpgradeType {
      *
      * @return Maximum number of times this upgrade can be upgraded.
      */
-    public int maxRepeats() {
+    public final int maxRepeats() {
         return defaultMaxRepeats[id];
     }
 
-    public UnitType whatsRequired() {
+    public final UnitType whatsRequired() {
         return whatsRequired(1);
     }
 
@@ -332,7 +336,7 @@ public enum UpgradeType {
      * @param level The next upgrade level. Upgrades start at level 0.
      * @return {@link UnitType} required to obtain this upgrade.
      */
-    public UnitType whatsRequired(final int level) {
+    public final UnitType whatsRequired(final int level) {
         return level >= 1 && level <= 3 ? requirements[level - 1][id] : UnitType.None;
     }
 }

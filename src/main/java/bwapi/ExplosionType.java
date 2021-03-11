@@ -37,4 +37,8 @@ public enum ExplosionType {
     ExplosionType(final int id) {
         this.id = id;
     }
+
+    public final int getID() {
+        return id;
+    }
 }

@@ -197,6 +197,10 @@ public enum TechType {
         this.id = id;
     }
 
+    public final int getID() {
+        return id;
+    }
+
     /**
      * Retrieves the race that is required to research or use the {@link TechType}.
      * <p>
@@ -205,7 +209,7 @@ public enum TechType {
      *
      * @return {@link Race} object indicating which race is designed to use this technology type.
      */
-    public Race getRace() {
+    public final Race getRace() {
         return techRaces[id];
     }
 
@@ -214,7 +218,7 @@ public enum TechType {
      *
      * @return Amount of minerals needed in order to research this technology.
      */
-    public int mineralPrice() {
+    public final int mineralPrice() {
         return defaultOreCost[id];
     }
 
@@ -223,7 +227,7 @@ public enum TechType {
      *
      * @return Amount of vespene gas needed in order to research this technology.
      */
-    public int gasPrice() {
+    public final int gasPrice() {
         return mineralPrice();
     }
 
@@ -233,7 +237,7 @@ public enum TechType {
      * @return The time, in frames, it will take for the research to complete.
      * @see Unit#getRemainingResearchTime
      */
-    public int researchTime() {
+    public final int researchTime() {
         return defaultTimeCost[id];
     }
 
@@ -243,7 +247,7 @@ public enum TechType {
      * @return Energy cost of the ability.
      * @see Unit#getEnergy
      */
-    public int energyCost() {
+    public final int energyCost() {
         return defaultEnergyCost[id];
     }
 
@@ -254,7 +258,7 @@ public enum TechType {
      * Returns {@link UnitType#None} If the technology/ability is either provided for free or never
      * available.
      */
-    public UnitType whatResearches() {
+    public final UnitType whatResearches() {
         return whatResearches[id];
     }
 
@@ -266,7 +270,7 @@ public enum TechType {
      * @return WeaponType containing information about the ability's behavior.
      * Returns {@link WeaponType#None} If there is no corresponding WeaponType.
      */
-    public WeaponType getWeapon() {
+    public final WeaponType getWeapon() {
         return techWeapons[id];
     }
 
@@ -275,7 +279,7 @@ public enum TechType {
      *
      * @return true if the ability can be used on other units, and false if it can not.
      */
-    public boolean targetsUnit() {
+    public final boolean targetsUnit() {
         return (techTypeFlags[id] & TARG_UNIT) != 0;
     }
 
@@ -284,7 +288,7 @@ public enum TechType {
      *
      * @return true if the ability can be used on the terrain.
      */
-    public boolean targetsPosition() {
+    public final boolean targetsPosition() {
         return (techTypeFlags[id] & TARG_POS) != 0;
     }
 
@@ -293,7 +297,7 @@ public enum TechType {
      *
      * @return Set of UnitTypes that can use this ability when researched.
      */
-    public List<UnitType> whatUses() {
+    public final List<UnitType> whatUses() {
         return Collections.unmodifiableList(Arrays.asList(techWhatUses[id]));
     }
 
@@ -302,7 +306,7 @@ public enum TechType {
      *
      * @return {@link Order} representing the action a Unit uses to perform this ability
      */
-    public Order getOrder() {
+    public final Order getOrder() {
         return techOrders[id];
     }
 
@@ -316,7 +320,7 @@ public enum TechType {
      * @see Player#completedUnitCount
      * @since 4.1.2
      */
-    public UnitType requiredUnit() {
+    public final UnitType requiredUnit() {
         return this == Lurker_Aspect ? UnitType.Zerg_Lair : UnitType.None;
     }
 }

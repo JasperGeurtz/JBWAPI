@@ -35,10 +35,13 @@ public enum GameType {
         Arrays.stream(GameType.values()).forEach(v -> idToEnum[v.id] = v);
     }
 
-
     final int id;
 
     GameType(final int id) {
         this.id = id;
+    }
+
+    public final int getID() {
+        return id;
     }
 }

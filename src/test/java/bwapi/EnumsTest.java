@@ -38,20 +38,20 @@ public class EnumsTest {
      * Check, via reflection, that all Enums that have an "idToEnum" array to be of correct lenght
      */
     @Test
-    public void checkAllidToEnumsArrayLenghts() throws Exception {
-        for (Class<?> cls : getBWAPIEnums()) {
+    public void checkAllidToEnumsArrayLengths() throws Exception {
+        for (final Class<?> cls : getBWAPIEnums()) {
             if (Arrays.stream(cls.getDeclaredFields()).anyMatch(f -> f.getName().equals(ARRAY_VALUE))) {
                 Field field = cls.getDeclaredField(ARRAY_VALUE);
                 assertFalse(field.isAccessible());
                 field.setAccessible(true);
 
-                int arrayLength = ((Object[])field.get(null)).length;
+                final int arrayLength = ((Object[])field.get(null)).length;
                 int maxEnumVal = Integer.MIN_VALUE;
                 for (Object obj : (Object[]) cls.getDeclaredMethod("values").invoke(null)) {
-                    Field f = obj.getClass().getDeclaredField(ID_VALUE);
+                    final Field f = obj.getClass().getDeclaredField(ID_VALUE);
                     assertFalse(f.isAccessible());
                     f.setAccessible(true);
-                    int val = f.getInt(obj);
+                    final int val = f.getInt(obj);
                     if (val > maxEnumVal) {
                         maxEnumVal = val;
                     }
@@ -63,19 +63,32 @@ public class EnumsTest {
 
     @Test
     public void ensureSimpleGettersReturnNonNullAndDontFail() throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
-        for (Class<?> cls : getBWAPIEnums()) {
-            List<Method> simpleGetters = Arrays.stream(cls.getMethods())
+        for (final Class<?> cls : getBWAPIEnums()) {
+            final List<Method> simpleGetters = Arrays.stream(cls.getMethods())
                     .filter(it -> it.getParameterCount() == 0 && it.getReturnType() != Void.TYPE)
                     .collect(Collectors.toList());
-            for (Object type : cls.getEnumConstants()) {
-                for (Method getter : simpleGetters) {
+            for (final Object type : cls.getEnumConstants()) {
+                for (final Method getter : simpleGetters) {
                     // WHEN
-                    Object result = getter.invoke(type);
+                    final Object result = getter.invoke(type);
 
                     // THEN
                     assertThat(result).describedAs("When calling " + getter.getName()).isNotNull();
                 }
             }
+        }
+    }
+
+    @Test
+    public void checkAllEnumsHaveGetID() throws Exception {
+        for (final Class<?> cls : getBWAPIEnums()) {
+            final List<Method> getID = Arrays.stream(cls.getMethods())
+                    .filter(it -> it.getParameterCount() == 0
+                            && it.getReturnType() == Integer.TYPE
+                            && it.getName().equals("getID")
+                            )
+                    .collect(Collectors.toList());
+            assertThat(getID).size().isEqualTo(1);
         }
     }
 }

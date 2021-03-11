@@ -17,4 +17,7 @@ public enum MouseButton {
         this.id = id;
     }
 
+    public final int getID() {
+        return id;
+    }
 }

@@ -64,4 +64,8 @@ public enum BulletType {
     BulletType(final int id) {
         this.id = id;
     }
+
+    public final int getID() {
+        return id;
+    }
 }

@@ -32,6 +32,10 @@ public enum PlayerType {
         this.id = id;
     }
 
+    public final int getID() {
+        return id;
+    }
+
     /**
      * Identifies whether or not this type is used for the pre-game lobby.
      * A type such as {@link PlayerType#ComputerLeft} would only appear in-game when a computer
@@ -39,7 +43,7 @@ public enum PlayerType {
      *
      * @return true if this type can appear in the pre-game lobby, false otherwise.
      */
-    public boolean isLobbyType() {
+    public final boolean isLobbyType() {
         return this == EitherPreferComputer || this == EitherPreferHuman || isRescueNeutralType();
     }
 
@@ -50,7 +54,7 @@ public enum PlayerType {
      * @return true if the type can appear in-game, false otherwise.
      * @see #isLobbyType
      */
-    public boolean isGameType() {
+    public final boolean isGameType() {
         return this == Player || this == Computer || isRescueNeutralType();
     }
 

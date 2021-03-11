@@ -64,6 +64,10 @@ public enum Race {
         this.id = id;
     }
 
+    public final int getID() {
+        return id;
+    }
+
     /**
      * Retrieves the default worker type for this {@link Race}.
      * <p>
@@ -71,7 +75,7 @@ public enum Race {
      *
      * @return {@link UnitType} of the worker that this race uses.
      */
-    public UnitType getWorker() {
+    public final UnitType getWorker() {
         return workerTypes[id];
     }
 
@@ -85,7 +89,7 @@ public enum Race {
      * @return {@link UnitType} of the center that this race uses.
      * @since 4.2.0
      */
-    public UnitType getResourceDepot() {
+    public final UnitType getResourceDepot() {
         return baseTypes[id];
     }
 
@@ -96,7 +100,7 @@ public enum Race {
      * See https://github.com/bwapi/bwapi/issues/621 for more information.
      */
     @Deprecated
-    public UnitType getCenter() {
+    public final UnitType getCenter() {
         return getResourceDepot();
     }
 
@@ -108,7 +112,7 @@ public enum Race {
      *
      * @return {@link UnitType} of the structure used to harvest gas.
      */
-    public UnitType getRefinery() {
+    public final UnitType getRefinery() {
         return refineryTypes[id];
     }
 
@@ -121,7 +125,7 @@ public enum Race {
      *
      * @return {@link UnitType} for transportation.
      */
-    public UnitType getTransport() {
+    public final UnitType getTransport() {
         return transportTypes[id];
     }
 
@@ -134,7 +138,7 @@ public enum Race {
      *
      * @return {@link UnitType} that provides the player with supply.
      */
-    public UnitType getSupplyProvider() {
+    public final UnitType getSupplyProvider() {
         return supplyTypes[id];
     }
 }
