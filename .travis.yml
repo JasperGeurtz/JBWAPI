@@ -1,17 +1,19 @@
-dist: trusty
-language: python
-python:
-  - "3.6"
+dist: bionic
+language: java
+jdk: openjdk8
+python: 3.6
+addons:
+  apt:
+    packages:
+      - python3-pip
+      - python3-setuptools
 services:
   - docker
 cache:
   directories:
     - /tmp/sc-docker
-before_install:
-  - jdk_switcher use oraclejdk8
 before_script:
   - git clone https://github.com/Bytekeeper/sc-docker.git
-  - cp it/sc-docker-support/*.dockerfile sc-docker/docker/dockerfiles
   - pushd sc-docker
   - pip3 install numpy==1.16.6
   - python3 setup.py bdist_wheel
@@ -22,8 +24,21 @@ before_script:
   - popd
   - "[ -f /tmp/sc-docker/starcraft.zip ] || cp sc-docker/scbw/local_docker/starcraft.zip /tmp/sc-docker/starcraft.zip"
   - scbw.play --install
+  - unzip sc-docker/scbw/local_docker/starcraft.zip -d it/openbw/
+
 script:
   - sh mvnw clean install
   - sh mvnw -f it/bots/pom.xml package
   - for bot in $(ls -d it/bots/*/); do BOTNAME=$(basename $bot); echo "Setting up $BOTNAME"; mkdir -p "$HOME/.scbw/bots/$BOTNAME/AI" "$HOME/.scbw/bots/$BOTNAME/read" "$HOME/.scbw/bots/$BOTNAME/write"; cp it/sc-docker-support/BWAPI.dll "$HOME/.scbw/bots/$BOTNAME"; cp "$bot/target/"*-with-dependencies.jar "$HOME/.scbw/bots/$BOTNAME/AI"; cp "$bot/bot.json" "$HOME/.scbw/bots/$BOTNAME"; done
-  - scbw.play --headless --bots jbwapibot SittingDuck --timeout 180 --docker_image starcraft:game 2>&1 | grep 'Winner is BotPlayer:jbwapibot:T' || (cat $HOME/.scbw/games/*/logs_0/* && false)
+  - set -e
+  - scbw.play --headless --bots jbwapibot SittingDuck --timeout 180 --docker_image starcraft:game 2>&1 | grep 'Winner is BotPlayer:jbwapibot:T' || (cat $HOME/.scbw/games/*/logs_0/* && exit 1)
+  - pushd it/openbw
+  - mv BROODAT.MPQ BrooDat.mpq
+  - mv patch_rt.mpq Patch_rt.mpq
+  - mv STARDAT.MPQ StarDat.mpq
+  - chmod u+x BWAPILauncher
+  - BWAPI_CONFIG_AUTO_MENU__RACE=Terran BWAPI_CONFIG_AUTO_MENU__MAP=~/.scbw/maps/sscai/\(3\)Neo\ Moon\ Glaive.scx ./BWAPILauncher&
+  - BWAPI_CONFIG_AUTO_MENU__RACE=Terran BWAPI_CONFIG_AUTO_MENU__MAP=~/.scbw/maps/sscai/\(3\)Neo\ Moon\ Glaive.scx ./BWAPILauncher&
+  - sleep 1
+  - java -cp ../bots/SittingDuck/target/SittingDuck-*-jar-with-dependencies.jar SittingDuck &
+  - java -jar ../bots/jbwapibot/target/MarineHell-*-jar-with-dependencies.jar | grep "Hello from JBWAPI!" || exit 1
